@@ -1,0 +1,46 @@
+.pokemon-image {
+  width: 25%;
+}
+
+.types-image {
+  width: 30%;
+}
+
+.pokemon-card {
+  display: flex;
+  justify-content: space-between;
+}
+
+.text-card {
+  color: var(--black-color);
+}
+
+.type-container {
+  display: flex;
+  gap: 5px;
+}
+
+.image-background {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  right: -50px;
+  top: -60px;
+  z-index: -2;
+  opacity: 0.1;
+}
+
+@media (orientation: landscape) {
+  .image-background {
+    width: 350px;
+    height: 350px;
+  }
+
+  .types-image {
+    width: 40%;
+  }
+
+  .type-2 {
+    display: none;
+  }
+}
