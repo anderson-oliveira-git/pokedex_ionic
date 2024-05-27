@@ -11,4 +11,17 @@ export class Pokemon {
   abilities: string[];
   hidden_ability: string;
   stats: Stat[];
+
+  constructor () {
+    this.id = 0;
+    this.name = '';
+    this.type1 = '';
+    this.type2 = '';
+    this.sprite = '';
+    this.height = 0;
+    this.weight = 0;
+    this.abilities = [];
+    this.hidden_ability = '';
+    this.stats = [];
+  }
 }
