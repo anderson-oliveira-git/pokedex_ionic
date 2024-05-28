@@ -1,9 +1,52 @@
 <ion-content [fullscreen]="true">
 
+  <div class="name-pokemon" style="background-color: var(--{{pokemon.type1}}-color);">
+    <strong>{{pokemon.name}}</strong>
+    <ion-icon name="heart-outline"></ion-icon>
+  </div>
 
+  <div class="header-datails" style="background-color: var(--{{pokemon.type1}}-color);">
+    <img class="pokemon-image" src="../../../assets/images/pokemons/{{pokemon.id}}.png"/>
+  </div>
+
+  <div class="pokemon-infos">
+    <div class="weight-and-height">
+      <div class="weight">
+        <span>Weight</span>
+        <strong class="text-weight">{{pokemon.weight}}kg</strong>
+      </div>
+      <div class="height">
+        <span>Height</span>
+        <strong class="text-height">{{pokemon.height}}m</strong>
+      </div>
+    </div>
+
+    <div class="data">
+      <div class="data-text">
+        <strong>type one</strong>
+        <span>{{pokemon.type1}}</span>
+      </div>
+      <div class="data-text" *ngIf="pokemon.type2">
+        <strong>type two</strong>
+        <span>{{pokemon.type2}}</span>
+      </div>
+      <div class="data-text" *ngIf="pokemon.hidden_ability">
+        <strong>abilities</strong>
+        <span>{{pokemon.abilities}}</span>
+      </div>
+      <div class="data-text" *ngIf="pokemon.hidden_ability">
+        <strong>hidden ability</strong>
+        <span>{{pokemon.hidden_ability}}</span>
+      </div>
+      <div class="data-text" *ngFor="let stat of pokemon.stats; let i = index;">
+        <strong>{{stat.stat.name}}</strong>
+        <span>{{stat.base_stat}}</span>
+      </div>
+    </div>
+  </div>
 
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-    <ion-fab-button (click)="navigateToPokemons()">
+    <ion-fab-button (click)="navigateToPokemons()" size="small" style="--background: var(--{{pokemon.type1}}-color);">
       <ion-icon name="return-up-back-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>

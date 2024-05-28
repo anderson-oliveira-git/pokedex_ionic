@@ -14,9 +14,11 @@ export class DatailsPokemonsPage {
 
   constructor(
     private navParams: NavParams,
-    private navController: NavController
+    private navController: NavController,
   ) {
     this.pokemon = this.navParams.get('pokemon');
+    console.log(this.pokemon);
+
   }
 
   navigateToPokemons() {
