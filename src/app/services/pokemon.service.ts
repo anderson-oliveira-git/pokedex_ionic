@@ -13,7 +13,7 @@ export class PokemonService {
 
   constructor () {
     this.limit = 200;
-    this.nextUrl = `https://pokeapi.co/api/v2/pokemon/?limit=${this.limit}`;
+    this.nextUrl = `https://pokeapi.co/api/v2/pokemon/?limit=${this.limit}&offset=0`;
   }
 
   getAllPokemons(): Promise<Pokemon[]> | null {
@@ -52,7 +52,7 @@ export class PokemonService {
               const pokemon_data = response.data;
               const pokemon_object = new Pokemon();
 
-              pokemon_object.id = pokemon_data.order;
+              pokemon_object.id = pokemon_data.id;
               pokemon_object.name = pokemon_data.name;
               pokemon_object.type1 = pokemon_data.types[0].type.name;
 
