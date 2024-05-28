@@ -1,0 +1,39 @@
+.ngx-pagination {
+  padding-left: 0 !important;
+  margin-bottom: 0 !important;
+  margin-top: 0.5rem !important;
+}
+
+.ngx-pagination .current {
+  border-radius: 25%;
+  background-color: var(--primary-color) !important;
+}
+
+.position-bottom {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.text {
+  color: var(--white-color);
+}
+
+.ft-1 {
+  font-size: 1.3rem;
+}
+
+.ft-08 {
+  font-size: 0.8rem;
+}
+
+.tabs-none {
+  display: none;
+}
