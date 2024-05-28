@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NavController, NavParams } from '@ionic/angular';
 import { Pokemon } from 'src/app/models/pokemon';
 import { PokemonService } from 'src/app/services/pokemon.service';
 
@@ -11,28 +13,36 @@ import { PokemonService } from 'src/app/services/pokemon.service';
 export class ListPokemonsPage implements OnInit {
 
   public pokemons: Pokemon[];
+  public page: number = 1;
+  public totalPokemons: number;
 
   constructor(
-    private pokemonService: PokemonService
+    private pokemonService: PokemonService,
+    private navParam: NavParams,
+    private navController: NavController,
+    private router: Router
   ) {
     this.pokemons = [];
+    this.totalPokemons = 0;
   }
 
-  ngOnInit() {
-    this.morePokemon();
+  ngOnInit(): void {
+    this.listPokemon();
   }
 
-  morePokemon () {
+  async listPokemon() {
     const promise = this.pokemonService.getAllPokemons();
 
     if (promise) {
       promise.then((result: Pokemon[]) => {
-        this.pokemons = this.pokemons.concat(result);
-
-        console.log(this.pokemons);
-
+        this.pokemons = result;
+        this.totalPokemons = this.pokemons.length;
       });
     }
   }
 
+  pokemonDatails(pokemon: Pokemon) {
+    this.navParam.data['pokemon'] = pokemon;
+    this.navController.navigateForward('datails-pokemons');
+  }
 }

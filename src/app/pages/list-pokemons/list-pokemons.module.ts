@@ -8,6 +8,7 @@ import { ListPokemonsPageRoutingModule } from './list-pokemons-routing.module';
 
 import { ListPokemonsPage } from './list-pokemons.page';
 import { PokemonCardModule } from 'src/app/components/pokemon-card/pokemon-card.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { PokemonCardModule } from 'src/app/components/pokemon-card/pokemon-card.
     FormsModule,
     IonicModule,
     ListPokemonsPageRoutingModule,
-    PokemonCardModule
+    PokemonCardModule,
+    NgxPaginationModule
   ],
   declarations: [ListPokemonsPage]
 })

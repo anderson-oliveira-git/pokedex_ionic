@@ -4,12 +4,23 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="pokemons-list">
     <app-pokemon-card
-      *ngFor="let pokemon of pokemons; let i = index;"
-      [pokemon_name]="pokemon.name"
-      [pokemon_image]="pokemon.sprite"
-      [type_1]="pokemon.type1"
-      [type_2]="pokemon.type2"
-    ></app-pokemon-card>
+        *ngFor="let pokemon of pokemons | paginate: {itemsPerPage: 6,
+        currentPage: page, totalItems: totalPokemons}; let i = index;"
+        [pokemon_name]="pokemon.name"
+        [pokemon_image]="pokemon.sprite"
+        [type_1]="pokemon.type1"
+        [type_2]="pokemon.type2"
+        (click)="pokemonDatails(pokemon)"
+      ></app-pokemon-card>
+
+    <div class="pagination">
+      <pagination-controls
+        [maxSize]="7"
+        (pageChange)="page = $event"
+        previousLabel=""
+        nextLabel=""
+      ></pagination-controls>
+    </div>
 </ion-content>
