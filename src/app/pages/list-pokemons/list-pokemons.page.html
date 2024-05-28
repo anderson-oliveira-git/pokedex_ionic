@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="secondary">
     <ion-title>Pokemons</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -23,4 +23,16 @@
         nextLabel=""
       ></pagination-controls>
     </div>
+
+    <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+      <ion-fab-button size="small" color="secondary" (click)="navigateToHome()">
+        <ion-icon name="home-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+    <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+      <ion-fab-button size="small" color="secondary" (click)="navigateToFavorites()">
+        <ion-icon name="heart-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
 </ion-content>

@@ -20,6 +20,7 @@ export class ListPokemonsPage implements OnInit {
     private pokemonService: PokemonService,
     private navParam: NavParams,
     private navController: NavController,
+    private router: Router
   ) {
     this.pokemons = [];
     this.totalPokemons = 0;
@@ -43,5 +44,13 @@ export class ListPokemonsPage implements OnInit {
   pokemonDatails(pokemon: Pokemon) {
     this.navParam.data['pokemon'] = pokemon;
     this.navController.navigateForward('datails-pokemons');
+  }
+
+  navigateToFavorites() {
+    this.router.navigate(['/favorites-pokemons']);
+  }
+
+  navigateToHome() {
+    this.router.navigate(['/home']);
   }
 }
