@@ -1,3 +1,4 @@
+![capa_repositorio](https://github.com/anderson-oliveira-git/pokedex_ionic/assets/6682086/46ef3d10-a72e-4c81-b0cc-c3ae1aa47bb5)
 
 
 Este projeto é uma Pokedex construída utilizando Ionic e Angular. O objetivo é fornecer uma interface intuitiva e responsiva para que os usuários possam explorar informações sobre diversos Pokémon. A aplicação se conecta a uma API pública para obter os dados dos Pokémon e os exibe de forma organizada e acessível.
