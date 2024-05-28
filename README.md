@@ -30,3 +30,11 @@ Este projeto é uma Pokedex construída utilizando Ionic e Angular. O objetivo �
 4. **Acessar a aplicação no navegador**:
    ```bash
    http://localhost:8100
+
+5. **Assim que o projeto estiver rodando no navegador, realize os seguintes passos:**\
+Clique com o botão direito do mouse na tela onde o projeto estiver rodando e seleciona e opção inspecionar.\
+![inspecionar](https://github.com/anderson-oliveira-git/pokedex_ionic/assets/6682086/e45f51c7-fa66-4eb5-9ddf-597a9ac81704)\
+E logo em seguida ative a visualização mobile clicando no segundo icone, representado por um notebook e um celular, na barra superior do inspecionar.\
+![mobile](https://github.com/anderson-oliveira-git/pokedex_ionic/assets/6682086/ba5619e4-4583-4ccc-86b3-551a5e266be8)
+
+
