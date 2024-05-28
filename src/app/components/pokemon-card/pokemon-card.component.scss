@@ -12,7 +12,7 @@
 }
 
 .text-card {
-  color: var(--black-color);
+  color: var(--white-color);
 }
 
 .type-container {
@@ -31,16 +31,15 @@
 }
 
 @media (orientation: landscape) {
-  .image-background {
-    width: 350px;
-    height: 350px;
-  }
-
   .types-image {
     width: 40%;
   }
 
   .type-2 {
     display: none;
+  }
+
+  .pokemon-card {
+    width: 50%;
   }
 }
