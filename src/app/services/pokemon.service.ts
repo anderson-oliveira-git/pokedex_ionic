@@ -8,13 +8,15 @@ import { Pokemon } from '../models/pokemon';
 
 export class PokemonService {
 
-  private nextUrl: string;
+  public nextUrl: string;
+  public limit: number;
 
   constructor () {
-    this.nextUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=6';
+    this.limit = 200;
+    this.nextUrl = `https://pokeapi.co/api/v2/pokemon/?limit=${this.limit}`;
   }
 
-  getAllPokemons () {
+  getAllPokemons(): Promise<Pokemon[]> | null {
     const url: string = this.nextUrl;
 
     const options = {
