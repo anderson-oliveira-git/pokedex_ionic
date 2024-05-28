@@ -1,7 +1,5 @@
 .ngx-pagination {
   padding-left: 0 !important;
-  margin-bottom: 0 !important;
-  margin-top: 0.5rem !important;
 }
 
 .ngx-pagination .current {
@@ -11,7 +9,7 @@
 
 .position-bottom {
   position: absolute;
-  bottom: 50px;
+  bottom: 0;
   left: 0;
 }
 
