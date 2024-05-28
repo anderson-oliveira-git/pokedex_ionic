@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>favorites-pokemons</ion-title>
+  <ion-toolbar color="secondary">
+    <ion-title>Favorites</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,4 +10,10 @@
       <ion-title size="large">favorites-pokemons</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button size="small" color="secondary" (click)="navigateToListPokemons()">
+      <ion-icon name="return-up-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
