@@ -20,7 +20,6 @@ export class ListPokemonsPage implements OnInit {
     private pokemonService: PokemonService,
     private navParam: NavParams,
     private navController: NavController,
-    private router: Router
   ) {
     this.pokemons = [];
     this.totalPokemons = 0;
