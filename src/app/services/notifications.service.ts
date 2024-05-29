@@ -30,4 +30,29 @@ export class NotificationsService {
 
     (await alert).present();
   }
+
+  async alertConfirm(message: string, callback: () => void) {
+    const alert = await this.alertController.create({
+      header: 'Confirmar!',
+      message: message,
+      buttons: [
+        {
+          text: 'Sim',
+          role: 'confirm',
+          handler: () => {
+            callback();
+          }
+        },
+        {
+          text: 'Não',
+          role: 'cancel',
+          handler: () => {
+            alert.dismiss();
+          }
+        }
+      ]
+    });
+
+    (alert).present();
+  }
 }
