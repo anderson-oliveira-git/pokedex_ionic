@@ -23,7 +23,11 @@ export class FavoritesPokemonsPage {
     this.pokemons = await this.storageService.getStorageData();
   }
 
-  navigateToListPokemons() {
+  removeAllFavorites() {
+    this.storageService.removeAll();
+  }
+
+  navigateToListPokemons(): void {
     this.router.navigate(['/list-pokemons']);
   }
 }
