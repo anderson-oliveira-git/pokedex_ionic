@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { Pokemon } from '../models/pokemon';
 import { NotificationsService } from './notifications.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class StorageService {
 
   constructor(
     private storage: Storage,
+    private router: Router,
     private notifications: NotificationsService
   ){}
 
@@ -28,6 +30,11 @@ export class StorageService {
     try {
       const favorites = await this.getStorageData();
 
+      if (await this.verifyIfExistInStorage(pokemon.name)) {
+        this.notifications.alertError('Esse pokemon já existe em seus favoritos!');
+        return;
+      }
+
       favorites.push(pokemon);
 
       await this.storage.set('favorites', favorites);
@@ -38,7 +45,24 @@ export class StorageService {
     }
   }
 
-  public async getStorageData(): Promise<any[]> {
-    return await this.storage.get('favorites') || [];
+  public removeAll() {
+    this.notifications.alertConfirm(
+      'Tem certeza que deseja remover todos os favoritos?',
+      async () => {
+        await this.storage.clear();
+        this.router.navigate(['/list-pokemons']);
+        this.notifications.alertSuccess('Favoritos removidos com sucesso!');
+        this.initializeStorage();
+      }
+    );
+  }
+
+  public getStorageData(): Promise<any[]> {
+    return this.storage.get('favorites') || [];
+  }
+
+  public async verifyIfExistInStorage(pokemonName: string): Promise<boolean> {
+    const favorites = await this.getStorageData();
+    return favorites.some(favorite => favorite.name === pokemonName);
   }
 }
