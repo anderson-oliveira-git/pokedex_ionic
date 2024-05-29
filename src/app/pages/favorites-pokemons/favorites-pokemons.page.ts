@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-favorites-pokemons',
@@ -8,9 +9,19 @@ import { Router } from '@angular/router';
 })
 export class FavoritesPokemonsPage {
 
+  public pokemons: any[] = [];
+
   constructor(
-    private router: Router
-  ){}
+    private router: Router,
+    private storageService: StorageService
+  ){
+    this.storageService.initializeStorage();
+    this.getFavoritesPokemons();
+  }
+
+  async getFavoritesPokemons() {
+    this.pokemons = await this.storageService.getStorageData();
+  }
 
   navigateToListPokemons() {
     this.router.navigate(['/list-pokemons']);

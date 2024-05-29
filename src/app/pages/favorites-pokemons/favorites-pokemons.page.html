@@ -5,11 +5,14 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">favorites-pokemons</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <app-pokemon-card
+    *ngFor="let pokemon of pokemons; let i = index;"
+    [pokemon_name]="pokemon.name"
+    [pokemon_image]="pokemon.sprite"
+    [type_1]="pokemon.type1"
+    [type_2]="pokemon.type2"
+  ></app-pokemon-card>
 
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
     <ion-fab-button size="small" color="secondary" (click)="navigateToListPokemons()">
