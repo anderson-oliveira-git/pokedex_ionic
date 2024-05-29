@@ -13,6 +13,9 @@ Este projeto é uma Pokedex construída utilizando Ionic e Angular. O objetivo �
 6. **Interface de Usuário**: Focar na criação de uma interface de usuário limpa e intuitiva, usando os componentes visuais do Ionic e práticas de design modernas.
 7. **Documentação**: Manter a documentação atualizada, explicando a estrutura do projeto, como configurar o ambiente, rodar a aplicação e executar testes.
 
+## Observação
+Limitei a quantidade de Pokémons em 806, pois a biblioteca de imagens com melhor resolução que encontrei só tinha 806 Pokémons. Mas, da forma que fiz, é fácil expandir, basta adicionar uma nova imagem do novo Pokémon na pasta assets/images/pokemons e incrementar o valor do limite no serviço em app/services/pokemons.service.ts.
+
 ## Como Executar o Projeto
 
 1. **Clonar o Repositório**:
