@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavParams } from '@ionic/angular';
-import { Storage } from '@ionic/storage-angular';
 import { Pokemon } from 'src/app/models/pokemon';
-import { NotificationsService } from 'src/app/services/notifications.service';
 import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
