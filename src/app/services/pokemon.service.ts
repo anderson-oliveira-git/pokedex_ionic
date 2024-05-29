@@ -8,15 +8,11 @@ import { Pokemon } from '../models/pokemon';
 
 export class PokemonService {
 
-  public nextUrl: string;
-  public limit: number;
+  public nextUrl: string = 'https://pokeapi.co/api/v2/pokemon/?limit=806';
 
-  constructor () {
-    this.limit = 200;
-    this.nextUrl = `https://pokeapi.co/api/v2/pokemon/?limit=${this.limit}&offset=0`;
-  }
+  constructor () {}
 
-  getAllPokemons(): Promise<Pokemon[]> | null {
+  getAllPokemons(): Promise<any[]> | null {
     const url: string = this.nextUrl;
 
     const options = {
@@ -31,53 +27,52 @@ export class PokemonService {
 
         if (response.data) {
           const results = response.data.results;
-          this.nextUrl = response.data.next;
 
-          const promises: Promise<any>[] = [];
-
-          for (let index = 0; index < results.length; index++) {
-            const pokemon = results[index];
-            const url_pokemon = pokemon.url;
+          const promises: Promise<any>[] = results.map(async (pokemon: any, index: number) => {
+            const urlPokemon = pokemon.url;
             const options = {
-              url: url_pokemon,
+              url: urlPokemon,
               headers: {},
               params: {}
+            };
+
+            return CapacitorHttp.get(options).then(response => ({
+              index,
+              data: response.data
+            }));
+          });
+
+          const responses = await Promise.all(promises);
+
+          responses.sort((a, b) => a.index - b.index).forEach(response => {
+            const pokemonData = response.data;
+            const pokemonObject = new Pokemon();
+
+            pokemonObject.id = pokemonData.id;
+            pokemonObject.name = pokemonData.name;
+            pokemonObject.type1 = pokemonData.types[0].type.name;
+
+            if (pokemonData.types[1]) {
+              pokemonObject.type2 = pokemonData.types[1].type.name;
             }
 
-            promises.push(CapacitorHttp.get(options));
-          }
+            pokemonObject.sprite = pokemonData.sprites.front_default;
+            pokemonObject.weight = pokemonData.weight / 10;
+            pokemonObject.height = pokemonData.height / 10;
+            pokemonObject.stats = pokemonData.stats;
 
-          await Promise.all(promises).then(responses => {
-            for (const response of responses) {
-              const pokemon_data   = response.data;
-              const pokemon_object = new Pokemon();
+            pokemonObject.abilities = pokemonData.abilities
+              .filter((ab: any) => !ab.is_hidden)
+              .map((ab: any) => ab.ability.name);
 
-              pokemon_object.id    = pokemon_data.id;
-              pokemon_object.name  = pokemon_data.name;
-              pokemon_object.type1 = pokemon_data.types[0].type.name;
+            const hidden_ability = pokemonData.abilities
+              .find((ab: any) => ab.is_hidden);
 
-              if (pokemon_data.types[1]) {
-                pokemon_object.type2 = pokemon_data.types[1].type.name;
-              }
-
-              pokemon_object.sprite = pokemon_data.sprites.front_default;
-              pokemon_object.weight = pokemon_data.weight / 10;
-              pokemon_object.height = pokemon_data.height / 10;
-              pokemon_object.stats  = pokemon_data.stats;
-
-              pokemon_object.abilities = pokemon_data.abilities
-                .filter((ab: any) => !ab.is_hidden)
-                .map((ab: any) => ab.ability.name);
-
-              const hidden_ability = pokemon_data.abilities
-                .find((ab: any) => ab.is_hidden);
-
-              if (hidden_ability) {
-                pokemon_object.hidden_ability = hidden_ability.ability.name;
-              }
-
-              pokemons.push(pokemon_object);
+            if (hidden_ability) {
+              pokemonObject.hidden_ability = hidden_ability.ability.name;
             }
+
+            pokemons.push(pokemonObject);
           });
         }
 
