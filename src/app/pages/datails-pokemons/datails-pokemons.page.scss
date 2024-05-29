@@ -12,6 +12,7 @@
   position: absolute;
   width: 90%;
   bottom: -50px;
+  animation: slideIn 0.5s forwards;
 }
 
 .name-pokemon {
@@ -78,3 +79,26 @@
   opacity: 0.8;
 }
 
+@keyframes slideIn {
+  from {
+      transform: translateX(100%);
+  }
+  to {
+      transform: translateX(0);
+  }
+}
+
+@media (orientation: landscape) {
+  .pokemon-image {
+    position: absolute;
+    width: 25%;
+    bottom: -50px;
+  }
+
+  .header-datails {
+    height: 140px;
+    border-bottom-left-radius: 100%;
+    border-bottom-right-radius: 100%;
+  }
+
+}

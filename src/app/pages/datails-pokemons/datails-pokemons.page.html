@@ -2,7 +2,9 @@
 
   <div class="name-pokemon" style="background-color: var(--{{pokemon.type1}}-color);">
     <strong>{{pokemon.name}}</strong>
-    <ion-icon name="heart-outline"></ion-icon>
+    <div slot="icon-only" (click)="saveFavorite(pokemon)">
+      <ion-icon name="heart-outline"></ion-icon>
+    </div>
   </div>
 
   <div class="header-datails" style="background-color: var(--{{pokemon.type1}}-color);">
