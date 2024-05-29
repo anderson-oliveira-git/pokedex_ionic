@@ -49,11 +49,11 @@ export class PokemonService {
 
           await Promise.all(promises).then(responses => {
             for (const response of responses) {
-              const pokemon_data = response.data;
+              const pokemon_data   = response.data;
               const pokemon_object = new Pokemon();
 
-              pokemon_object.id = pokemon_data.id;
-              pokemon_object.name = pokemon_data.name;
+              pokemon_object.id    = pokemon_data.id;
+              pokemon_object.name  = pokemon_data.name;
               pokemon_object.type1 = pokemon_data.types[0].type.name;
 
               if (pokemon_data.types[1]) {
@@ -63,12 +63,14 @@ export class PokemonService {
               pokemon_object.sprite = pokemon_data.sprites.front_default;
               pokemon_object.weight = pokemon_data.weight / 10;
               pokemon_object.height = pokemon_data.height / 10;
-              pokemon_object.stats = pokemon_data.stats;
+              pokemon_object.stats  = pokemon_data.stats;
 
-              pokemon_object.abilities = pokemon_data.abilities.filter((ab: any) => !ab.is_hidden)
+              pokemon_object.abilities = pokemon_data.abilities
+                .filter((ab: any) => !ab.is_hidden)
                 .map((ab: any) => ab.ability.name);
 
-              const hidden_ability = pokemon_data.abilities.find((ab: any) => ab.is_hidden);
+              const hidden_ability = pokemon_data.abilities
+                .find((ab: any) => ab.is_hidden);
 
               if (hidden_ability) {
                 pokemon_object.hidden_ability = hidden_ability.ability.name;
