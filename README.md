@@ -16,6 +16,25 @@ Este projeto é uma Pokedex construída utilizando Ionic e Angular. O objetivo �
 ## Observação
 Limitei a quantidade de Pokémons em 806, pois a biblioteca de imagens com melhor resolução que encontrei só tinha 806 Pokémons. Mas, da forma que fiz, é fácil expandir, basta adicionar uma nova imagem do novo Pokémon na pasta assets/images/pokemons e incrementar o valor do limite no serviço em app/services/pokemons.service.ts.
 
+## Funcionalidades Principais
+
+### Listagem de pokemons
+- Lista todos os pokemons da PokeAPI
+
+### Mostra os detalhes de cada pokemon especifico
+- Ao clicar em qualquer pokemon que foi listado, o app mostra uma tela com todas as informações sobre aquele pokemon.
+
+### Salva pokemons como favoritos
+- A tela de detalhe oferece um botão com icone de coração, clicando nele, é possível salvar o pokemon nos favoritos.
+- Um pokemon só pode ser salvo uma vez, um alerta será emetido quando o pokemon já está na lista de favoritos.
+
+### Remove todos os favoritos
+- A tela de favoritos contém um botão para remover todos da lista.
+- Um alerta será emetido caso esse botão seja pressionado, se confirmado a exclusão, todos serão removidos e você será redirecionado para a tela que lista os pokemons.
+
+### Remove um por vez dos favoritos
+- Em desenvovimento
+
 ## Como Executar o Projeto
 
 1. **Clonar o Repositório**:
