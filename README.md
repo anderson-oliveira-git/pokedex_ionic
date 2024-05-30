@@ -33,7 +33,8 @@ Limitei a quantidade de Pokémons em 806, pois a biblioteca de imagens com melho
 - Um alerta será emetido caso esse botão seja pressionado, se confirmado a exclusão, todos serão removidos e você será redirecionado para a tela que lista os pokemons.
 
 ### Remove um por vez dos favoritos
-- Em desenvovimento
+- Remove apenas o pokemon que for clicado na tela de favoritos.
+- Ao clicar em um podemon, um alerta será emitido, perguntando se deseja remover esse pokemon especifico dos favoritos.
 
 ## Como Executar o Projeto
 
