@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavController, NavParams } from '@ionic/angular';
-import { take } from 'rxjs';
+import { NavParams } from '@ionic/angular';
 import { Pokemon } from 'src/app/models/pokemon';
 import { PokemonService } from 'src/app/services/pokemon.service';
 import { StorageService } from 'src/app/services/storage.service';
