@@ -5,10 +5,17 @@
       alt="Logo com o nome pokedex preto com a letra O substituida por uma pokebola."
     />
   </div>
+
   <div class="card-home position-bottom">
     <p class="text flex">
-      <span class="ft-1">Bem vindo!</span>
-      <span class="ft-08">Encontre todos os pokemons em um só lugar.</span>
+      <span class="ft-1">Bem vindo, treinador!</span>
+      <span class="ft-08">Encontre todos os Pokémon em um só lugar.</span>
     </p>
   </div>
+
+  <ion-fab horizontal="center" vertical="bottom" slot="fixed">
+    <ion-fab-button size="small" color="dark" (click)="navigateToListPokemons()">
+      <ion-icon name="chevron-up-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

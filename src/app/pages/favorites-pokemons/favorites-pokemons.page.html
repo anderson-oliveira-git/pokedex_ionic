@@ -1,13 +1,43 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>favorites-pokemons</ion-title>
+  <ion-toolbar color="dark">
+    <ion-title>Favoritos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">favorites-pokemons</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <div class="favorite-list">
+    <app-pokemon-card
+      *ngFor="let pokemon of pokemons; let i = index;"
+      [pokemon_name]="pokemon.name"
+      [pokemon_image]="pokemon.sprite"
+      [type_1]="pokemon.type1"
+      [type_2]="pokemon.type2"
+      (click)="removeFavoritePokemon(i)"
+    ></app-pokemon-card>
+  </div>
+
+  <div *ngIf="!pokemons || pokemons.length === 0" class="no-favorites">
+    <ion-img
+      class="no-favorites-img"
+      src="../../../assets/images/png/sad_pikachu.png"
+    >
+    </ion-img>
+    <p class="no-favorites-text">
+      <strong>Desculpe!</strong>
+      <span>Você ainda não tem pokémon favoritos.</span>
+    </p>
+  </div>
+
+  <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+    <ion-fab-button size="small" color="dark" (click)="removeAllFavorites()" [disabled]="pokemons.length === 0">
+      <ion-icon name="trash-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button size="small" color="dark" (click)="navigateToListPokemons()">
+      <ion-icon name="return-up-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

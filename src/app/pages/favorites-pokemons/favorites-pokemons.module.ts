@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { FavoritesPokemonsPageRoutingModule } from './favorites-pokemons-routing.module';
 
 import { FavoritesPokemonsPage } from './favorites-pokemons.page';
+import { PokemonCardModule } from 'src/app/components/pokemon-card/pokemon-card.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FavoritesPokemonsPageRoutingModule
+    FavoritesPokemonsPageRoutingModule,
+    PokemonCardModule
   ],
   declarations: [FavoritesPokemonsPage]
 })

@@ -8,81 +8,71 @@ import { Pokemon } from '../models/pokemon';
 
 export class PokemonService {
 
-  public nextUrl: string;
-  public limit: number;
+  public urlApi: string = 'https://pokeapi.co/api/v2/pokemon/?limit=806';
 
-  constructor () {
-    this.limit = 200;
-    this.nextUrl = `https://pokeapi.co/api/v2/pokemon/?limit=${this.limit}`;
-  }
+  constructor () {}
 
-  getAllPokemons(): Promise<Pokemon[]> | null {
-    const url: string = this.nextUrl;
-
+  getAllPokemons(): Promise<any[]> | null {
     const options = {
-      url,
+      url: this.urlApi,
       headers: {},
       params: {}
     };
 
-    if (url) {
-      return CapacitorHttp.get(options).then(async (response) => {
-        let pokemons: Pokemon[] = [];
+    return CapacitorHttp.get(options).then(async (response) => {
+      let pokemons: Pokemon[] = [];
 
-        if (response.data) {
-          const results = response.data.results;
-          this.nextUrl = response.data.next;
+      if (response.data) {
+        const results = response.data.results;
 
-          const promises: Promise<any>[] = [];
+        const promises: Promise<any>[] = results.map(async (pokemon: any, index: number) => {
+          const urlPokemon = pokemon.url;
+          const options = {
+            url: urlPokemon,
+            headers: {},
+            params: {}
+          };
 
-          for (let index = 0; index < results.length; index++) {
-            const pokemon = results[index];
-            const url_pokemon = pokemon.url;
-            const options = {
-              url: url_pokemon,
-              headers: {},
-              params: {}
-            }
+          return CapacitorHttp.get(options).then(response => ({
+            index,
+            data: response.data
+          }));
+        });
 
-            promises.push(CapacitorHttp.get(options));
+        const responses = await Promise.all(promises);
+
+        responses.forEach(pokemon => {
+          const pokemonObject = new Pokemon();
+
+          pokemonObject.id    = pokemon.data.id;
+          pokemonObject.name  = pokemon.data.name;
+          pokemonObject.type1 = pokemon.data.types[0].type.name;
+
+          if (pokemon.data.types[1]) {
+            pokemonObject.type2 = pokemon.data.types[1].type.name;
           }
 
-          await Promise.all(promises).then(responses => {
-            for (const response of responses) {
-              const pokemon_data = response.data;
-              const pokemon_object = new Pokemon();
+          pokemonObject.sprite = pokemon.data.sprites.front_default;
+          pokemonObject.weight = pokemon.data.weight / 10;
+          pokemonObject.height = pokemon.data.height / 10;
+          pokemonObject.stats  = pokemon.data.stats;
 
-              pokemon_object.id = pokemon_data.order;
-              pokemon_object.name = pokemon_data.name;
-              pokemon_object.type1 = pokemon_data.types[0].type.name;
+          pokemonObject.abilities = pokemon.data.abilities
+            .filter((ability: any) => !ability.is_hidden)
+            .map((ability: any) => ability.ability.name);
 
-              if (pokemon_data.types[1]) {
-                pokemon_object.type2 = pokemon_data.types[1].type.name;
-              }
+          const hidden_ability = pokemon.data.abilities
+            .find((ability: any) => ability.is_hidden);
 
-              pokemon_object.sprite = pokemon_data.sprites.front_default;
-              pokemon_object.weight = pokemon_data.weight / 10;
-              pokemon_object.height = pokemon_data.height / 10;
-              pokemon_object.stats = pokemon_data.stats;
+          if (hidden_ability) {
+            pokemonObject.hidden_ability = hidden_ability.ability.name;
+          }
 
-              pokemon_object.abilities = pokemon_data.abilities.filter((ab: any) => !ab.is_hidden)
-                .map((ab: any) => ab.ability.name);
+          pokemons.push(pokemonObject);
+        });
+      }
 
-              const hidden_ability = pokemon_data.abilities.find((ab: any) => ab.is_hidden);
-
-              if (hidden_ability) {
-                pokemon_object.hidden_ability = hidden_ability.ability.name;
-              }
-
-              pokemons.push(pokemon_object);
-            }
-          });
-        }
-
-        return pokemons;
-      });
-    }
-
-    return null;
+      return pokemons;
+    });
   }
 }

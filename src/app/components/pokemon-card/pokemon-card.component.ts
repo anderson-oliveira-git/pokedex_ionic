@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-pokemon-card',
@@ -9,17 +9,20 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PokemonCardComponent {
 
   @Input()
-  pokemon_name?: string;
+  pokemon_name: string;
 
   @Input()
-  pokemon_image?: string;
+  pokemon_image: string;
 
   @Input()
-  type_1?: string;
+  type_1: string;
 
   @Input()
   type_2?: string;
 
-  constructor() { }
-
+  constructor() {
+    this.pokemon_name = '';
+    this.pokemon_image = '';
+    this.type_1 = '';
+  }
 }

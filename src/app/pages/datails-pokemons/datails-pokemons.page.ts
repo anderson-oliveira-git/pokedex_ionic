@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { NavParams } from '@ionic/angular';
 import { Pokemon } from 'src/app/models/pokemon';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-datails-pokemons',
@@ -14,12 +16,18 @@ export class DatailsPokemonsPage {
 
   constructor(
     private navParams: NavParams,
-    private navController: NavController
+    private storageService: StorageService,
+    private router: Router
   ) {
+    this.storageService.initializeStorage();
     this.pokemon = this.navParams.get('pokemon');
   }
 
+  saveFavorite(pokemon: Pokemon) {
+    this.storageService.saveOnStorage(pokemon);
+  }
+
   navigateToPokemons() {
-    this.navController.back();
+    this.router.navigate(['/list-pokemons']);
   }
 }

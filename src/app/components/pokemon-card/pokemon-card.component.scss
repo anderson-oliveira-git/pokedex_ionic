@@ -9,6 +9,7 @@
 .pokemon-card {
   display: flex;
   justify-content: space-between;
+  border-radius: 8px;
 }
 
 .text-card {
@@ -31,6 +32,9 @@
 }
 
 @media (orientation: landscape) {
+  :host {
+    width: 50%;
+  }
   .types-image {
     width: 40%;
   }
@@ -38,8 +42,5 @@
   .type-2 {
     display: none;
   }
-
-  .pokemon-card {
-    width: 50%;
-  }
 }
+

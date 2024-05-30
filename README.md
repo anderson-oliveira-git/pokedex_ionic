@@ -1,6 +1,5 @@
 ![capa_repositorio](https://github.com/anderson-oliveira-git/pokedex_ionic/assets/6682086/46ef3d10-a72e-4c81-b0cc-c3ae1aa47bb5)
 
-
 Este projeto é uma Pokedex construída utilizando Ionic e Angular. O objetivo é fornecer uma interface intuitiva e responsiva para que os usuários possam explorar informações sobre diversos Pokémon. A aplicação se conecta a uma API pública para obter os dados dos Pokémon e os exibe de forma organizada e acessível.
 
 ## Telas do aplicativo
@@ -21,7 +20,30 @@ Este projeto é uma Pokedex construída utilizando Ionic e Angular. O objetivo �
 7. **Documentação**: Manter a documentação atualizada, explicando a estrutura do projeto, como configurar o ambiente, rodar a aplicação e executar testes.
 
 ## Observação
-Limitei a quantidade de Pokémons em 806, pois a biblioteca de imagens com melhor resolução que encontrei só tinham 806 Pokémons. Mas, da forma que fiz, é fácil expandir, basta adicionar uma nova imagem do novo Pokémon na pasta assets/images/pokemons e incrementar o valor do limite no serviço em app/services/pokemons.service.ts.
+Limitei a quantidade de Pokémons em 806, pois a biblioteca de imagens com melhor resolução que encontrei só tinha 806 Pokémons. Mas, da forma que fiz, é fácil expandir, basta adicionar uma nova imagem do novo Pokémon na pasta assets/images/pokemons e incrementar o valor do limite no serviço em app/services/pokemons.service.ts.
+
+## Funcionalidades Principais
+
+### Listagem de pokemons
+- Lista todos os pokemons da PokeAPI
+
+### Busca por pokemons especificos
+- O aplicativo disponibiliza um campo de busca para pesquisar por pokemons especificos.
+
+### Mostra os detalhes de cada pokemon especifico
+- Ao clicar em qualquer pokemon que foi listado, o app mostra uma tela com todas as informações sobre aquele pokemon.
+
+### Salva pokemons como favoritos
+- A tela de detalhe oferece um botão com icone de coração, clicando nele, é possível salvar o pokemon nos favoritos.
+- Um pokemon só pode ser salvo uma vez, um alerta será emetido quando o pokemon já está na lista de favoritos.
+
+### Remove todos os favoritos
+- A tela de favoritos contém um botão para remover todos da lista.
+- Um alerta será emetido caso esse botão seja pressionado, se confirmado a exclusão, todos serão removidos e você será redirecionado para a tela que lista os pokemons.
+
+### Remove um por vez dos favoritos
+- Remove apenas o pokemon que for clicado na tela de favoritos.
+- Ao clicar em um podemon, um alerta será emitido, perguntando se deseja remover esse pokemon especifico dos favoritos.
 
 ## Como Executar o Projeto
 

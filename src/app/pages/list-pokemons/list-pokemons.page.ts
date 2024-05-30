@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavController, NavParams } from '@ionic/angular';
+import { NavParams } from '@ionic/angular';
 import { Pokemon } from 'src/app/models/pokemon';
 import { PokemonService } from 'src/app/services/pokemon.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-list-pokemons',
@@ -15,34 +16,44 @@ export class ListPokemonsPage implements OnInit {
   public pokemons: Pokemon[];
   public page: number = 1;
   public totalPokemons: number;
+  public searchPokemon: string;
 
   constructor(
     private pokemonService: PokemonService,
     private navParam: NavParams,
-    private navController: NavController,
-    private router: Router
+    private stogareService: StorageService,
+    private router: Router,
   ) {
     this.pokemons = [];
     this.totalPokemons = 0;
+    this.searchPokemon = '';
   }
 
-  ngOnInit(): void {
-    this.listPokemon();
-  }
-
-  async listPokemon() {
+  async ngOnInit() {
     const promise = this.pokemonService.getAllPokemons();
 
     if (promise) {
       promise.then((result: Pokemon[]) => {
         this.pokemons = result;
+        console.log(this.pokemons);
+
         this.totalPokemons = this.pokemons.length;
       });
     }
+
+    this.stogareService.initializeStorage();
   }
 
   pokemonDatails(pokemon: Pokemon) {
     this.navParam.data['pokemon'] = pokemon;
-    this.navController.navigateForward('datails-pokemons');
+    this.router.navigate(['/datails-pokemons']);
+  }
+
+  navigateToFavorites() {
+    this.router.navigate(['/favorites-pokemons']);
+  }
+
+  navigateToHome() {
+    this.router.navigate(['/home']);
   }
 }

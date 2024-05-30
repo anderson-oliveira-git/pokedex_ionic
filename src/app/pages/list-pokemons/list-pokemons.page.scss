@@ -4,3 +4,16 @@
   align-items: center;
   width: 100%;
 }
+
+.pokemons-list {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+@media (orientation: landscape) {
+  .pokemons-list ion-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
