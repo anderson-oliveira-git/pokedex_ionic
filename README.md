@@ -21,6 +21,9 @@ Limitei a quantidade de Pokémons em 806, pois a biblioteca de imagens com melho
 ### Listagem de pokemons
 - Lista todos os pokemons da PokeAPI
 
+### Busca por pokemons especificos
+- O aplicativo disponibiliza um campo de busca para pesquisar por pokemons especificos.
+
 ### Mostra os detalhes de cada pokemon especifico
 - Ao clicar em qualquer pokemon que foi listado, o app mostra uma tela com todas as informações sobre aquele pokemon.
 
