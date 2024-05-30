@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="dark">
-    <ion-title>Favorites</ion-title>
+    <ion-title>Favoritos</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,6 +13,7 @@
       [pokemon_image]="pokemon.sprite"
       [type_1]="pokemon.type1"
       [type_2]="pokemon.type2"
+      (click)="removeFavoritePokemon(i)"
     ></app-pokemon-card>
   </div>
 
@@ -23,8 +24,8 @@
     >
     </ion-img>
     <p class="no-favorites-text">
-      <strong>SORRY!</strong>
-      <span>You don't have favorites pokemons!</span>
+      <strong>Desculpe!</strong>
+      <span>Você ainda não tem pokémons favoritos.</span>
     </p>
   </div>
 
