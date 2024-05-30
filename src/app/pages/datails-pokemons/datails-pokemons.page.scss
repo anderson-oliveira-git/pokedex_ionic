@@ -90,8 +90,7 @@
 
 @media (orientation: landscape) {
   .pokemon-image {
-    position: absolute;
-    width: 25%;
+    width: 30%;
     bottom: -50px;
   }
 
@@ -100,5 +99,11 @@
     border-bottom-left-radius: 100%;
     border-bottom-right-radius: 100%;
   }
+}
 
+@media (min-width: 1024px) {
+  .pokemon-image {
+    width: 20%;
+    bottom: -150px;
+  }
 }
