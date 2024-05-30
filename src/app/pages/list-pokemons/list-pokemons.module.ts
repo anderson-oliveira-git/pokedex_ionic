@@ -9,6 +9,7 @@ import { ListPokemonsPageRoutingModule } from './list-pokemons-routing.module';
 import { ListPokemonsPage } from './list-pokemons.page';
 import { PokemonCardModule } from 'src/app/components/pokemon-card/pokemon-card.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CustomFilterPipe } from 'src/app/custom-filter-pipe.pipe';
 
 @NgModule({
   imports: [
@@ -17,9 +18,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     IonicModule,
     ListPokemonsPageRoutingModule,
     PokemonCardModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
-  declarations: [ListPokemonsPage]
+  declarations: [ListPokemonsPage, CustomFilterPipe]
 })
 
 export class ListPokemonsPageModule {}
