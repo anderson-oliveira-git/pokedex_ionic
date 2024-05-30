@@ -27,7 +27,11 @@ export class FavoritesPokemonsPage {
     this.storageService.removeAll();
   }
 
-  navigateToListPokemons(): void {
+  removeFavoritePokemon(indexPokemon: number) {
+    this.storageService.removeOne(indexPokemon, this.pokemons[indexPokemon].name);
+  }
+
+  navigateToListPokemons() {
     this.router.navigate(['/list-pokemons']);
   }
 }
