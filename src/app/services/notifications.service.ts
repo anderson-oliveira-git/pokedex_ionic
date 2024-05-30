@@ -21,9 +21,9 @@ export class NotificationsService {
     (await alert).present();
   }
 
-  async alertError (message: string) {
+  async alertError (header: string, message: string) {
     const alert = this.alertController.create({
-      header: 'Erro!',
+      header: header,
       message: message,
       buttons: ['Ok']
     });
