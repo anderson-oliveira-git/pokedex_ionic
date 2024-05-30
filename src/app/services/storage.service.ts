@@ -31,7 +31,7 @@ export class StorageService {
       const favorites = await this.getStorageData();
 
       if (await this.verifyIfExistInStorage(pokemon.name)) {
-        this.notifications.alertError('Esse pokemon já existe em seus favoritos!');
+        this.notifications.alertError('Atenção!', 'Esse pokemon já existe em seus favoritos!');
         return;
       }
 
@@ -41,7 +41,7 @@ export class StorageService {
       this.notifications.alertSuccess('Pokémon salvo com sucesso aos seus favoritos!');
 
     } catch (error) {
-      this.notifications.alertError('Algo deu errado ao tentar favoritar!');
+      this.notifications.alertError('Eita!', 'Algo deu errado ao tentar favoritar!');
     }
   }
 
@@ -53,6 +53,21 @@ export class StorageService {
         this.router.navigate(['/list-pokemons']);
         this.notifications.alertSuccess('Favoritos removidos com sucesso!');
         this.initializeStorage();
+      }
+    );
+  }
+
+  public async removeOne(index: number, pokemonName: string) {
+    this.notifications.alertConfirm(
+      `Tem certeza que deseja remover o ${pokemonName} dos favoritos?`,
+      async () => {
+        const favorites = await this.getStorageData();
+
+        favorites.splice(index, 1);
+        this.storage.set('favorites', favorites);
+
+        this.notifications.alertSuccess(`${pokemonName} removido com sucesso!`);
+        this.router.navigate(['/list-pokemons']);
       }
     );
   }
