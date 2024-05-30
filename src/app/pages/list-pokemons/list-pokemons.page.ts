@@ -17,6 +17,7 @@ export class ListPokemonsPage implements OnInit {
   public pokemons: Pokemon[];
   public page: number = 1;
   public totalPokemons: number;
+  public searchPokemon: string;
 
   constructor(
     private pokemonService: PokemonService,
@@ -26,6 +27,7 @@ export class ListPokemonsPage implements OnInit {
   ) {
     this.pokemons = [];
     this.totalPokemons = 0;
+    this.searchPokemon = '';
   }
 
   async ngOnInit() {
@@ -34,6 +36,8 @@ export class ListPokemonsPage implements OnInit {
     if (promise) {
       promise.then((result: Pokemon[]) => {
         this.pokemons = result;
+        console.log(this.pokemons);
+
         this.totalPokemons = this.pokemons.length;
       });
     }

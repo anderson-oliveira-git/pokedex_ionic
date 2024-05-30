@@ -5,10 +5,17 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-searchbar
+    show-clear-button="focus"
+    placeholder="Pesquisar"
+    [(ngModel)]="searchPokemon"
+  >
+  </ion-searchbar>
+
   <div class="pokemons-list">
     <ion-list *ngIf="pokemons.length > 0">
       <app-pokemon-card
-        *ngFor="let pokemon of pokemons | paginate: {itemsPerPage: 6,
+        *ngFor="let pokemon of pokemons | filter: searchPokemon | paginate: {itemsPerPage: 6,
         currentPage: page, totalItems: totalPokemons}; let i = index;"
         [pokemon_name]="pokemon.name"
         [pokemon_image]="pokemon.sprite"
