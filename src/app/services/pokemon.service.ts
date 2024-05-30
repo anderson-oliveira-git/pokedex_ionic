@@ -8,78 +8,71 @@ import { Pokemon } from '../models/pokemon';
 
 export class PokemonService {
 
-  public nextUrl: string = 'https://pokeapi.co/api/v2/pokemon/?limit=806';
+  public urlApi: string = 'https://pokeapi.co/api/v2/pokemon/?limit=806';
 
   constructor () {}
 
   getAllPokemons(): Promise<any[]> | null {
-    const url: string = this.nextUrl;
-
     const options = {
-      url,
+      url: this.urlApi,
       headers: {},
       params: {}
     };
 
-    if (url) {
-      return CapacitorHttp.get(options).then(async (response) => {
-        let pokemons: Pokemon[] = [];
+    return CapacitorHttp.get(options).then(async (response) => {
+      let pokemons: Pokemon[] = [];
 
-        if (response.data) {
-          const results = response.data.results;
+      if (response.data) {
+        const results = response.data.results;
 
-          const promises: Promise<any>[] = results.map(async (pokemon: any, index: number) => {
-            const urlPokemon = pokemon.url;
-            const options = {
-              url: urlPokemon,
-              headers: {},
-              params: {}
-            };
+        const promises: Promise<any>[] = results.map(async (pokemon: any, index: number) => {
+          const urlPokemon = pokemon.url;
+          const options = {
+            url: urlPokemon,
+            headers: {},
+            params: {}
+          };
 
-            return CapacitorHttp.get(options).then(response => ({
-              index,
-              data: response.data
-            }));
-          });
+          return CapacitorHttp.get(options).then(response => ({
+            index,
+            data: response.data
+          }));
+        });
 
-          const responses = await Promise.all(promises);
+        const responses = await Promise.all(promises);
 
-          responses.sort((a, b) => a.index - b.index).forEach(response => {
-            const pokemonData = response.data;
-            const pokemonObject = new Pokemon();
+        responses.forEach(pokemon => {
+          const pokemonObject = new Pokemon();
 
-            pokemonObject.id = pokemonData.id;
-            pokemonObject.name = pokemonData.name;
-            pokemonObject.type1 = pokemonData.types[0].type.name;
+          pokemonObject.id    = pokemon.data.id;
+          pokemonObject.name  = pokemon.data.name;
+          pokemonObject.type1 = pokemon.data.types[0].type.name;
 
-            if (pokemonData.types[1]) {
-              pokemonObject.type2 = pokemonData.types[1].type.name;
-            }
+          if (pokemon.data.types[1]) {
+            pokemonObject.type2 = pokemon.data.types[1].type.name;
+          }
 
-            pokemonObject.sprite = pokemonData.sprites.front_default;
-            pokemonObject.weight = pokemonData.weight / 10;
-            pokemonObject.height = pokemonData.height / 10;
-            pokemonObject.stats = pokemonData.stats;
+          pokemonObject.sprite = pokemon.data.sprites.front_default;
+          pokemonObject.weight = pokemon.data.weight / 10;
+          pokemonObject.height = pokemon.data.height / 10;
+          pokemonObject.stats  = pokemon.data.stats;
 
-            pokemonObject.abilities = pokemonData.abilities
-              .filter((ab: any) => !ab.is_hidden)
-              .map((ab: any) => ab.ability.name);
+          pokemonObject.abilities = pokemon.data.abilities
+            .filter((ability: any) => !ability.is_hidden)
+            .map((ability: any) => ability.ability.name);
 
-            const hidden_ability = pokemonData.abilities
-              .find((ab: any) => ab.is_hidden);
+          const hidden_ability = pokemon.data.abilities
+            .find((ability: any) => ability.is_hidden);
 
-            if (hidden_ability) {
-              pokemonObject.hidden_ability = hidden_ability.ability.name;
-            }
+          if (hidden_ability) {
+            pokemonObject.hidden_ability = hidden_ability.ability.name;
+          }
 
-            pokemons.push(pokemonObject);
-          });
-        }
+          pokemons.push(pokemonObject);
+        });
+      }
 
-        return pokemons;
-      });
-    }
-
-    return null;
+      return pokemons;
+    });
   }
 }
