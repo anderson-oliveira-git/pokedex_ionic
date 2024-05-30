@@ -35,8 +35,6 @@ export class ListPokemonsPage implements OnInit {
     if (promise) {
       promise.then((result: Pokemon[]) => {
         this.pokemons = result;
-        console.log(this.pokemons);
-
         this.totalPokemons = this.pokemons.length;
       });
     }
